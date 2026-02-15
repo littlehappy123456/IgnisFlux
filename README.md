@@ -60,5 +60,5 @@ The module monitors all configuration files located in `/data/adb/modules/IgnisF
 ## ⚠️ Requirements & Disclaimer
 
 - **Compatibility**: **Xiaomi / Redmi / POCO devices only.**
-- **Environment**: Requires Magisk 20.4+ for service execution.
+- **Environment**: Requires Magisk 20.4+
 - **Disclaimer**: Modifying charging currents and thermal profiles can affect device hardware. Use this module at your own risk. The developer is not responsible for any damage caused by improper configuration.
