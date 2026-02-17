@@ -14,14 +14,15 @@
 ## 📂 目录结构（示例）
 ```
 IgnisFlux/
-├── charging_thermal/       # 充电时部署的温控配置文件目录
-├── discharging_thermal/    # 放电时部署的温控配置文件目录
-├── above_threshold_charge_current
-├── at_or_below_threshold_charge_current
-├── capacity_threshold
-├── IgnisFlux               # C++ 二进制主程序
-├── is_control_current
-├── is_control_thermal
+├── params/                                 # 所有用户自定义配置及目录
+   ├── charging_thermal/                    # 充电时部署的温控
+   ├── discharging_thermal/                 # 放电时部署的温控
+   ├── above_threshold_charge_current       # 电量大于阈值时的电流限制
+   ├── at_or_below_threshold_charge_current # 电量小于等于阈值时的电流限制
+   ├── capacity_threshold                   # 电量切换点，例如90
+   ├── is_control_current                   # 电流控制开关
+   ├── is_control_thermal                   # 温控控制开关
+├── IgnisFlux                               # C++ 二进制文件
 ├── module.prop
 └── service.sh
 ```
@@ -38,11 +39,11 @@ IgnisFlux/
 | discharging_thermal   | [目录]           | 放电时使用的热控配置文件目录 |
 
 **使用方式**：
-- 将你自定义的温控文件分别放入 `charging_thermal/` 和 `discharging_thermal/` 两个文件夹中
+- 将你自定义的温控文件分别放入 `params/charging_thermal/` 和 `params/discharging_thermal/` 两个文件夹中
 - **状态智能切换**：
-  - 🔌 **充电中**：自动将 `charging_thermal/` 里的文件部署到系统温控路径
-  - 🔋 **非充电**：自动切换为 `discharging_thermal/` 里的配置
-- **关闭时清理**：当 `is_control_thermal` 设置为 0/false 时，模块会清除自定义配置，恢复系统默认温控
+  - 🔌 **充电中**：自动将 `params/charging_thermal/` 里的文件部署到系统温控路径
+  - 🔋 **非充电**：自动切换为 `params/discharging_thermal/` 里的配置
+- **关闭时清理**：当 `params/is_control_thermal` 设置为 0/false 时，模块会清除自定义配置，恢复系统默认温控
 
 ### 2. 充电电流限制
 
@@ -51,16 +52,19 @@ IgnisFlux/
 | is_control_current                  | 1/0 或 true/false | 是否启用充电电流限制                    |
 | capacity_threshold                  | 80         | 电池容量切换阈值（百分比）                |
 | at_or_below_threshold_charge_current| 22000000   | 电池 ≤ 阈值 时 的充电电流限制（单位：μA） |
-| above_threshold_charge_current      | 5000000    | 电池 > 阈值 时 的充电电流限制（单位：μA） |
+| above_threshold_charge_current      | 1000000    | 电池 > 阈值 时 的充电电流限制（单位：μA） |
 
 > **重要**：电流值必须使用**微安（μA）**单位，范围为`100000`~`22000000`，步长为100000 
 > 示例：3000mA = 3000000μA
+> **注意**: 电流限制属于逻辑约束，实际物理电流可能与其不一致。
+> - 单位：**微安（μA）**
+> - 范围：`100000`~`22000000` (`100mA`~`22000mA`)
+> - 步长：必须为 100000 的整数倍 (例如3000000=3000mA).
 
 ---
 
 ## ⚠️ 要求与免责声明
 
-- **兼容机型**：**仅限小米 / 红米 / POCO 设备**  
 - **环境要求**：需要 Magisk 20.4 或更高版本
 - **免责声明**：  
   修改充电电流与热控策略可能对设备硬件造成影响。  
