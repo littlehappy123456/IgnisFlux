@@ -54,9 +54,9 @@ The module monitors all configuration files located in `/data/adb/modules/IgnisF
 | `at_or_below_threshold_charge_current` | `22000000` | Limit (in μA) when battery ≤ threshold. |
 | `above_threshold_charge_current` | `1000000` | Limit (in μA) when battery > threshold. |
 
-> **Note**: The current limit is a logical constraint (software-level request) rather than a direct physical override.
+> **Note**: The current limit is a logical constraint. The actual physical current may not match
 > - Unit: Microamperes (μA).
-> - Range: 100000 to 22000000 (100mA to 22,000mA).
+> - Range: 100000 to 22000000 (100mA to 22000mA).
 > - Step: Must be a multiple of 100000 (e.g., 3000000 = 3000mA).
 ---
 
