@@ -1,3 +1,12 @@
+# V1.1.0
+Add overheat protection feature
+- New `overheat_protect`, `trigger_overheat_threshold`, `dismiss_overheat_threshold`, `overheat_charge_current` params
+- Overheat protection has higher priority than normal current control
+- Hysteresis design prevents oscillation around threshold temperatures
+- Automatic current recovery when overheat dismisses or protection is disabled
+- Temperature is monitored via kernel uevents and periodic polling (every 5 seconds)
+- Independent control — works with or without normal current control enabled
+
 # V1.0.2
 Fix bugs
 
