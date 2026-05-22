@@ -1,3 +1,8 @@
+# V1.1.1
+Update version to v1.1.1
+- customize.sh: remove redundant MODPATH line
+- customize.sh: use set_perm instead of chmod
+
 # V1.1.0
 Add overheat protection feature
 - New `overheat_protect`, `trigger_overheat_threshold`, `dismiss_overheat_threshold`, `overheat_charge_current` params

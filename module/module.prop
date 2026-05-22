@@ -1,7 +1,7 @@
 id=IgnisFlux
 name=IgnisFlux
-version=v1.1.0
-versionCode=4
+version=v1.1.1
+versionCode=5
 author=littlehappy
 description=Dynamically switching thermal profiles, locking charging currents, and protecting against overheat based on real-time battery status and user-defined thresholds.
 updateJson=https://github.com/littlehappy123456/IgnisFlux/raw/main/update.json
