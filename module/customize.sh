@@ -51,6 +51,7 @@ if [ "$IS_OVERHEAT_PROTECT" = false ]; then
     echo "0" > "$MODPATH/params/overheat_protect"
 fi
 
-chmod +x "$MODPATH/IgnisFlux"
+set_perm_recursive $MODPATH 0 0 0755 0644
+set_perm $MODPATH/IgnisFlux 0 0 0755
 
 ui_print "- Setup completed! *^_^*"
