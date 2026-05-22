@@ -400,11 +400,14 @@ int main() {
                         }
                     }
 
-                    // 电流控制：响应状态/容量/电流/温度变化
+                    // 电流控制 & 过热检测：响应状态/容量/电流变化事件
                     if (msg.find("POWER_SUPPLY_STATUS=") != std::string::npos ||
                         msg.find("POWER_SUPPLY_CAPACITY=") != std::string::npos ||
-                        msg.find("POWER_SUPPLY_CONSTANT_CHARGE_CURRENT=") != std::string::npos ||
-                        msg.find("POWER_SUPPLY_TEMP=") != std::string::npos) {
+                        msg.find("POWER_SUPPLY_CONSTANT_CHARGE_CURRENT=") != std::string::npos) {
+                        // 先更新过热状态（uevent 快路径），再执行电流写入
+                        if (g_overheat_protect) {
+                            handle_overheat_protection();
+                        }
                         handle_current_control();
                     }
                 }
