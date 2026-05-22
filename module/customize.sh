@@ -1,8 +1,5 @@
 #!/sbin/sh
 
-# Wait for module installation path
-MODPATH=${0%/*}
-
 ui_print "- Checking device compatibility..."
 
 # === Step 1: Preserve user's existing params on upgrade ===
