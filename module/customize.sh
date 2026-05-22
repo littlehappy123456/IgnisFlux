@@ -22,19 +22,16 @@ if [ ! -d /mi_ext ] || [ ! -e /dev/mi_display ]; then
     IS_CONTROL_THERMAL=false
 fi
 
-# Current control: check if the current node exists
+# Current control & Overheat: both need constant_charge_current
 if [ ! -f /sys/class/power_supply/battery/constant_charge_current ]; then
-    ui_print "- Current control node not found. Disabling current control."
+    ui_print "- Current control node not found. Disabling current control & overheat protection."
     IS_CONTROL_CURRENT=false
-fi
-
-# Overheat protection: needs both temp sensor and current control node
-if [ ! -f /sys/class/power_supply/battery/temp ]; then
-    ui_print "- Battery temp node not found. Disabling overheat protection."
     IS_OVERHEAT_PROTECT=false
 fi
-if [ ! -f /sys/class/power_supply/battery/constant_charge_current ]; then
-    ui_print "- Current control node not found. Disabling overheat protection."
+
+# Overheat protection: also needs temp sensor
+if [ ! -f /sys/class/power_supply/battery/temp ]; then
+    ui_print "- Battery temp node not found. Disabling overheat protection."
     IS_OVERHEAT_PROTECT=false
 fi
 
